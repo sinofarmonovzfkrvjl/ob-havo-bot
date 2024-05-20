@@ -2,3 +2,4 @@ aiogram
 requests
 logging
 asyncio
+beautifulsoup4
