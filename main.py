@@ -5,12 +5,12 @@ import asyncio
 from weather import Weather
 from keyboards import cities_button
 
-bot = Bot("5904607271:AAH-edy50mxak7BhgfeCB-9oLnlrK5QMPiM")
+bot = Bot("5904607271:AAEDJWUULTrD3zV8HOY7JbU94aiXk5Qexno")
 dp = Dispatcher()
 
 @dp.startup()
 async def startup(bot: Bot):
-    await bot.send_message(5230484991, "Bot ishga tushdi")
+    await bot.send_message(5230484991, "Bot ishga tushdi\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang")
 
 @dp.message(CommandStart())
 async def start(message: types.Message):
