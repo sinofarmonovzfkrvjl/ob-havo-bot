@@ -5,7 +5,7 @@ import asyncio
 from weather import Weather
 from keyboards import cities_button
 
-bot = Bot("5904607271:AAH-edy50mxak7BhgfeCB-9oLnlrK5QMPiM")
+bot = Bot("5904607271:AAEDJWUULTrD3zV8HOY7JbU94aiXk5Qexno")
 dp = Dispatcher()
 
 @dp.startup()
@@ -45,7 +45,7 @@ async def CallBack(call: types.CallbackQuery):
     elif call.data == "urganch":
         await call.message.answer(f"bugun Urganch ob havo harorati {Weather('urganch').today()} bo'lishi kutilmoqda")
     elif call.data == "farg'ona":
-        await call.message.answer(f"bugun Farg'ona ob havo harorati {Weather('farg\'ona').today()} bo'lishi kutilmoqda")
+        await call.message.answer(f"bugun Farg'ona ob havo harorati {Weather("farg'ona").today()} bo'lishi kutilmoqda")
     elif call.data == "xiva":
         await call.message.answer(f"bugun Xiva ob havo harorati {Weather('xiva').today()} bo'lishi kutilmoqda")
     await call.answer("")
