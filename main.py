@@ -45,7 +45,7 @@ async def CallBack(call: types.CallbackQuery):
     elif call.data == "urganch":
         await call.message.answer(f"bugun Urganch ob havo harorati {Weather('urganch').today()} bo'lishi kutilmoqda")
     elif call.data == "farg'ona":
-        await call.message.answer(f"bugun Farg'ona ob havo harorati {fargona} bo'lishi kutilmoqda")
+        await call.message.answer(f"bugun Farg'ona ob havo harorati {Weather('farg\'ona').today()} bo'lishi kutilmoqda")
     elif call.data == "xiva":
         await call.message.answer(f"bugun Xiva ob havo harorati {Weather('xiva').today()} bo'lishi kutilmoqda")
     await call.answer("")
