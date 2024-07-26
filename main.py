@@ -5,7 +5,6 @@ import asyncio
 from weather import Weather
 from keyboards import cities_button
 
-fargona = Weather('farg\'ona').today()
 bot = Bot("5904607271:AAH-edy50mxak7BhgfeCB-9oLnlrK5QMPiM")
 dp = Dispatcher()
 
