@@ -10,11 +10,11 @@ dp = Dispatcher()
 
 @dp.startup()
 async def startup(bot: Bot):
-    await bot.send_message(5230484991, "Bot ishga tushdi\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang")
+    await bot.send_message(5230484991, "Bot ishga tushdi")
 
 @dp.message(CommandStart())
 async def start(message: types.Message):
-    await message.answer(f"Salom {message.from_user.full_name}", reply_markup=cities_button)
+    await message.answer(f"Salom {message.from_user.full_name}\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang", reply_markup=cities_button)
 
 @dp.callback_query()
 async def CallBack(call: types.CallbackQuery):
