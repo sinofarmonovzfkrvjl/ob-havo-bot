@@ -4,13 +4,17 @@ import logging
 import asyncio
 from weather import Weather
 from keyboards import cities_button
+from dotenv import load_dotenv
+import os
 
-bot = Bot("5904607271:AAEDJWUULTrD3zV8HOY7JbU94aiXk5Qexno")
+load_dotenv()
+
+bot = Bot(os.getenv("TOKEN"))
 dp = Dispatcher()
 
 @dp.startup()
 async def startup(bot: Bot):
-    await bot.send_message(5230484991, "Bot ishga tushdi")
+    await bot.send_message(os.getenv("ID"), "Bot ishga tushdi")
 
 @dp.message(CommandStart())
 async def start(message: types.Message):
@@ -50,6 +54,10 @@ async def CallBack(call: types.CallbackQuery):
     elif call.data == "xiva":
         await call.message.answer(f"bugun Xiva ob havo harorati {Weather('xiva').today()} bo'lishi kutilmoqda")
     await call.answer("")
+
+@dp.shutdown()
+async def shutdown():
+    await bot.send_message(os.getenv("ID"), "Bot to'xtadi")
 
 async def main():
     await dp.start_polling(bot)
