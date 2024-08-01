@@ -21,7 +21,8 @@ async def start(message: types.Message):
     await message.answer(f"Salom {message.from_user.full_name}\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang", reply_markup=cities_button)
 
 @dp.callback_query()
-async def CallBack(call: types.CallbackQuery):
+async def CallBackQuery(call: types.CallbackQuery):
+    print(call.data)
     max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
     min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
 
