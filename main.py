@@ -22,11 +22,14 @@ async def start(message: types.Message):
 
 @dp.callback_query()
 async def CallBackQuery(call: types.CallbackQuery):
-    max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
-    min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
+    if call.data != "get_more_info":
+        max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
+        min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
 
-    await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
-    await call.answer(cache_time=60)
+        await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
+        await call.answer(cache_time=60)
+    else:
+        ...
 
 @dp.shutdown()
 async def shutdown():
