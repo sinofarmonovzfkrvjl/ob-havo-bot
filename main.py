@@ -23,11 +23,11 @@ async def start(message: types.Message):
 
 @dp.callback_query()
 async def CallBack(call: types.CallbackQuery):
-    weather = UzbekistanWeather(call.data).today()
+    max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
+    min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
+
     await call.message.answer(
-        f"bugungi o'rtacha harorat: {weather['bugun'][0]['harorat'][0]["o'rtacha"]}",
-        f"\teng baland harorat: {weather['bugun'][0]['harorat'][0]['max']}",
-        f"\teng past harorat: {weather['bugun'][0]['harorat'][0]['min']}",
+        f"bugungi {call.data} ob haodi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}",
     )
     # if call.data == "toshkent":
     #     await call.message.answer(f"bugun toshkentda ob havo harorati {UzbekistanWeather('toshkent').toshkent()} bo'lishi kutilmoqda")
