@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from pprint import pprint as print
+
 
 today = requests.get("https://www.ob-havo.com/asia/uzbekistan/tashkent?page=today")
 todaysoup = BeautifulSoup(today.content, 'html.parser')
@@ -23,7 +23,7 @@ class Weather:
         yogingarchilik = todaysoup.find_all("span", class_="length_unit mm_unit")
 
         m_taqsin_s = todaysoup.find_all("span", class_="wind_unit")
-        
+
         recommended_clothes = todaysoup.find_all("div", class_="wear_item_name")
 
         return [{"bugun": [
