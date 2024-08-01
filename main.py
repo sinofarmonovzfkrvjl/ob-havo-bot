@@ -9,6 +9,7 @@ import os
 
 load_dotenv()
 
+weather = Weather()
 bot = Bot(os.getenv("TOKEN"))
 dp = Dispatcher()
 
@@ -23,7 +24,7 @@ async def start(message: types.Message):
 @dp.callback_query()
 async def CallBack(call: types.CallbackQuery):
     if call.data == "toshkent":
-        await call.message.answer(f"bugun toshkentda ob havo harorati {Weather('toshkent').today()} bo'lishi kutilmoqda")
+        await call.message.answer(f"bugun toshkentda ob havo harorati {weather.toshkent()} bo'lishi kutilmoqda")
     elif call.data == "andijon":
         await call.message.answer(f"bugun Andijon ob havo harorati {Weather('andijon').today()} bo'lishi kutilmoqda")
     elif call.data == "buxoro":
