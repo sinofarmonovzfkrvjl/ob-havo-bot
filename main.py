@@ -14,7 +14,7 @@ dp = Dispatcher()
 
 @dp.startup()
 async def startup(bot: Bot):
-    await bot.send_message(os.getenv("ID"), "Bot ishga tushdi")
+    await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot ishga tushdi")
 
 @dp.message(CommandStart())
 async def start(message: types.Message):
@@ -57,7 +57,7 @@ async def CallBack(call: types.CallbackQuery):
 
 @dp.shutdown()
 async def shutdown():
-    await bot.send_message(os.getenv("ID"), "Bot to'xtadi")
+    await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot to'xtadi")
 
 async def main():
     await dp.start_polling(bot)

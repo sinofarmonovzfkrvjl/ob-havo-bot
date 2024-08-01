@@ -1,53 +1,81 @@
 import requests
 from bs4 import BeautifulSoup
+from pprint import pprint as print
 
-class WeatherNotFoundError(Exception):
-    """
-    Weather not found, make sure you write the city name correctly, use Weather().help()
-    """
+today = requests.get("https://www.ob-havo.com/asia/uzbekistan/tashkent?page=today")
+todaysoup = BeautifulSoup(today.content, 'html.parser')
+
+tomorrow = requests.get("https://www.ob-havo.com/asia/uzbekistan/tashkent?page=tomorrow")
+tomorrowsoup = BeautifulSoup(tomorrow.content, 'html.parser')
+
 
 class Weather:
-    def __init__(self, place):
-        self.place: str = place
+    def __init__(self):
+        pass
 
-    def help(self):
-        return """Siz mana bu shaharlarni ob havo malumotlarini ko'rishingiz mumkin:
-    toshkent, andijon, buxoro, guliston, jizzax, zarafshon, qarshi, navoiy, namangan, nukus, samarqand, termiz, urganch, farg'ona, xiva
-        """
+    def toshkent(self):
+        max_middle_temp = todaysoup.find("span", {"class": "fourteen-max"})
+        min_middle_temp = todaysoup.find("span", {"class": "fourteen-min"})
 
-    def today(self):
-        if self.place.lower() == "toshkent":
-            response = requests.get(f"https://obhavo.uz/tashkent")
-        elif self.place.lower() == "andijon":
-            response = requests.get(f"https://obhavo.uz/andijan")
-        elif self.place.lower() == "buxoro":
-            response = requests.get(f"https://obhavo.uz/bukhara")
-        elif self.place.lower() == "guliston":
-            response = requests.get(f"https://obhavo.uz/gulistan")
-        elif self.place.lower() == "jizzax":
-            response = requests.get(f"https://obhavo.uz/jizzakh")
-        elif self.place.lower() == "zarafshon":
-            response = requests.get(f"https://obhavo.uz/zarafshan")
-        elif self.place.lower() == "qarshi":
-            response = requests.get(f"https://obhavo.uz/karshi")
-        elif self.place.lower() == "navoiy":
-            response = requests.get(f"https://obhavo.uz/navoi")
-        elif self.place.lower() == "namangan":
-            response = requests.get(f"https://obhavo.uz/namangan")
-        elif self.place.lower() == "nukus":
-            response = requests.get(f"https://obhavo.uz/nukus")
-        elif self.place.lower() == "samarqand":
-            response = requests.get(f"https://obhavo.uz/samarkand")
-        elif self.place.lower() == "termiz":
-            response = requests.get(f"https://obhavo.uz/termez")
-        elif self.place.lower() == "urganch":
-            response = requests.get(f"https://obhavo.uz/urgench")
-        elif self.place.lower() == "farg'ona":
-            response = requests.get(f"https://obhavo.uz/ferghana")
-        elif self.place.lower() == "xiva":
-            response = requests.get(f"https://obhavo.uz/khiva")
-        else:
-            raise WeatherNotFoundError("Ob Havo malumoti topilmadi, shahar nomini to'g'ri yozganingiznga ishonch hosil qiling, yoki Weather().help() dan foydalaning")
-        soup = BeautifulSoup(response.content, 'html.parser')
-        data = soup.find_all("span")
-        return f"ertalab {data[2].text}, kechqurun: {data[3].text}"
+        necessary_things = todaysoup.find_all("span", {"class": "day-value"})
+        weather = todaysoup.find_all("div", class_="weather_des")
+
+        yogingarchilik = todaysoup.find_all("span", class_="length_unit mm_unit")
+
+        m_taqsin_s = todaysoup.find_all("span", class_="wind_unit")
+        
+        recommended_clothes = todaysoup.find_all("div", class_="wear_item_name")
+
+        return [{"bugun": [
+                    {"harorat": [{"min": min_middle_temp.text},
+                         {"max": max_middle_temp.text}]},
+                    {"3 soatlik harorat": {"00:00": {"harorat": necessary_things[0].text,
+                                             "havo": weather[0].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[0].text}",
+                                             "yog'ingarchilik": f"{necessary_things[16].text}{yogingarchilik[0].text}",
+                                             "namlik": f"{necessary_things[24].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[8].text}%"},
+                                   "03:00": {"harorat": necessary_things[1].text,
+                                             "havo": weather[1].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[1].text}",
+                                             "yog'ingarchilik": f"{necessary_things[17].text}{yogingarchilik[1].text}",
+                                             "namlik": f"{necessary_things[25].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[9].text}%"}, 
+                                   "06:00": {"harorat": necessary_things[2].text,
+                                             "havo": weather[2].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[2].text}",
+                                             "yog'ingarchilik": f"{necessary_things[18].text}{yogingarchilik[2].text}",
+                                             "namlik": f"{necessary_things[26].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[10].text}%"}, 
+                                   "09:00": {"harorat": necessary_things[3].text,
+                                             "havo": weather[3].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[3].text}",
+                                             "yog'ingarchilik": f"{necessary_things[19].text}{yogingarchilik[3].text}",
+                                             "namlik": f"{necessary_things[27].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[11].text}%"}, 
+                                   "12:00": {"harorat": necessary_things[4].text,
+                                             "havo": weather[4].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[4].text}",
+                                             "yog'ingarchilik": f"{necessary_things[20].text}{yogingarchilik[4].text}",
+                                             "namlik": f"{necessary_things[28].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[12].text}%"},
+                                   "15:00": {"harorat": necessary_things[5].text,
+                                             "havo": weather[5].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[5].text}",
+                                             "yog'ingarchilik": f"{necessary_things[21].text}{yogingarchilik[5].text}",
+                                             "namlik": f"{necessary_things[29].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[13].text}%"},
+                                   "18:00": {"harorat": necessary_things[6].text,
+                                             "havo": weather[6].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[5].text}",
+                                             "yog'ingarchilik": f"{necessary_things[22].text}{yogingarchilik[6].text}",
+                                             "namlik": f"{necessary_things[30].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[14].text}%"},
+                                   "21:00": {"harorat": necessary_things[7].text,
+                                             "havo": weather[7].text,
+                                             "shamol tezligi": f"{necessary_things[32].text}{m_taqsin_s[6].text}",
+                                             "yog'ingarchilik": f"{necessary_things[23].text}{yogingarchilik[7].text}",
+                                             "namlik": f"{necessary_things[31].text}%",
+                                             "yomg'ir yog'ish ehtimoli": f"{necessary_things[15].text}%"}}},
+                    {"kiyimlarga oid tavfsiyalar": [clothe.text for clothe in recommended_clothes]}]},
+               {"ertaga": "soon :)"}]
