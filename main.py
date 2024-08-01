@@ -3,7 +3,7 @@ from aiogram.filters import CommandStart
 import logging
 import asyncio
 from weather import UzbekistanWeather
-from keyboards import cities_button
+from keyboards import cities_button, more_info
 from dotenv import load_dotenv
 import os
 
@@ -26,7 +26,7 @@ async def CallBackQuery(call: types.CallbackQuery):
     max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
     min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
 
-    await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}",)
+    await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
     await call.answer(cache_time=60)
 
 @dp.shutdown()
