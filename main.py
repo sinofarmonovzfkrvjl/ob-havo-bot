@@ -22,7 +22,6 @@ async def start(message: types.Message):
 
 @dp.callback_query()
 async def CallBackQuery(call: types.CallbackQuery):
-    print(call.data)
     max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
     min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
 
