@@ -27,7 +27,7 @@ async def CallBackQuery(call: types.CallbackQuery):
     min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
 
     await call.message.answer(f"bugungi {call.data} ob haodi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}",)
-    await call.answer("")
+    await call.answer(cache_time=60)
 
 @dp.shutdown()
 async def shutdown():
@@ -36,7 +36,7 @@ async def shutdown():
 async def main():
 
     await bot.set_my_commands([
-        types.BotCommand("start", "botni ishga tushirish")
+        types.BotCommand(command="start", description="botni ishga tushirish")
     ])
 
     await dp.start_polling(bot)
