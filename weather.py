@@ -22,7 +22,7 @@ class UzbekistanWeather:
         elif self.place.lower() == "jizzax":
             response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/jizzakh?page=today")
         elif self.place.lower() == "zarafshon":
-            response = requests.get(f"https://obhavo.uz/zarafshan")
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/navoiy/zarafshon?page=today")
         elif self.place.lower() == "qarshi":
             response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/qashqadaryo/qarshi?page=today")
         elif self.place.lower() == "navoiy":
@@ -30,7 +30,7 @@ class UzbekistanWeather:
         elif self.place.lower() == "namangan":
             response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/namangan?page=today")
         elif self.place.lower() == "nukus":
-            response = requests.get(f"https://obhavo.uz/nukus")
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/karakalpakstan/nukus?page=today")
         elif self.place.lower() == "samarqand":
             response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/samarqand/samarkand?page=today")
         elif self.place.lower() == "termiz":
@@ -40,7 +40,15 @@ class UzbekistanWeather:
         elif self.place.lower() == "farg'ona":
             response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/fergana?page=today")
         elif self.place.lower() == "xiva":
-            response = requests.get(f"https://obhavo.uz/khiva")
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/xorazm/xiva?page=today")
+        elif self.place.lower() == "angren":
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/tashkent/angren?page=today")
+        elif self.place.lower() == "asaka":
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/andijan/asaka?page=today")
+        elif self.place.lower() == "baliqchi":
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/andijan/baliqchi?page=today")
+        elif self.place.lower() == "bekobod":
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/tashkent/bekobod?page=today")
         else:
             raise UzbekistanWeatherNotFoundError("Ob Havo malumoti topilmadi, shahar nomini to'g'ri yozganingiznga ishonch hosil qiling, yoki Weather().help() dan foydalaning")
         todaysoup = BeautifulSoup(response.content, 'html.parser')
