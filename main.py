@@ -29,7 +29,7 @@ async def CallBackQuery(call: types.CallbackQuery):
         await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
         await call.answer(cache_time=60)
     else:
-        ...
+        await call.answer(cache_time=60)
 
 @dp.shutdown()
 async def shutdown():
