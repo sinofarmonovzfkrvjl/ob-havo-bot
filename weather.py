@@ -51,8 +51,6 @@ class UzbekistanWeather:
         yogingarchilik = todaysoup.find_all("span", class_="length_unit mm_unit")
         m_taqsin_s = todaysoup.find_all("span", class_="wind_unit")
         recommended_clothes = todaysoup.find_all("div", class_="wear_item_name")
-
-        middle_temp = todaysoup.find("span", class_="temp_placeholder")
         return {"bugun": [
                     {"harorat": [{"min": min_middle_temp.text},
                         {"max": max_middle_temp.text}]},
@@ -104,7 +102,4 @@ class UzbekistanWeather:
                                             "yogingarchilik": f"{necessary_things[23].text}{yogingarchilik[7].text}",
                                             "namlik": f"{necessary_things[31].text}%",
                                             "yomgir yogish ehtimoli": f"{necessary_things[15].text}%"}}},
-                    {"kiyimlarga oid tavfsiyalar": [clothe.text for clothe in recommended_clothes]}]},
-    
-
-print(UzbekistanWeather("toshkent").today())
+                    {"kiyimlarga oid tavfsiyalar": [clothe.text for clothe in recommended_clothes]}]}

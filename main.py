@@ -9,7 +9,6 @@ import os
 
 load_dotenv()
 
-weather = UzbekistanWeather()
 bot = Bot(os.getenv("TOKEN"))
 dp = Dispatcher()
 
