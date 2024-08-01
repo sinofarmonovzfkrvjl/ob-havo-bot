@@ -26,9 +26,9 @@ async def CallBackQuery(call: types.CallbackQuery):
     max_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['max']
     min_weather = UzbekistanWeather(call.data).today()['bugun'][0]['harorat'][0]['min']
 
-    await call.message.answer(
-        f"bugungi {call.data} ob haodi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}",
-    )
+    await call.message.answer(f"bugungi {call.data} ob haodi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}",)
+
+    # old code
     # if call.data == "toshkent":
     #     await call.message.answer(f"bugun toshkentda ob havo harorati {UzbekistanWeather('toshkent').toshkent()} bo'lishi kutilmoqda")
     # elif call.data == "andijon":
@@ -67,6 +67,11 @@ async def shutdown():
     await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot to'xtadi")
 
 async def main():
+
+    await bot.set_my_commands([
+        types.BotCommand("start", "botni ishga tushirish")
+    ])
+
     await dp.start_polling(bot)
 
 
