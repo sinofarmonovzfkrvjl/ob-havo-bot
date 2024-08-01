@@ -24,7 +24,7 @@ class UzbekistanWeather:
         elif self.place.lower() == "zarafshon":
             response = requests.get(f"https://obhavo.uz/zarafshan")
         elif self.place.lower() == "qarshi":
-            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/qashqadaryo/qarshi")
+            response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/qashqadaryo/qarshi?page=today")
         elif self.place.lower() == "navoiy":
             response = requests.get(f"https://www.ob-havo.com/asia/uzbekistan/navoiy?page=today")
         elif self.place.lower() == "namangan":
