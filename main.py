@@ -34,78 +34,80 @@ async def CallBackQuery(call: types.CallbackQuery, state: FSMContext):
     await state.update_data({"city": call.data})
 
 @router.message(lambda hours: hours.data == ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'])
-async def hours_info(call: types.CallbackQuery):
+async def hours_info(call: types.CallbackQuery, state: FSMContext):
+    data = await state.get_data("city")
+    
     if call.data == "00:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "03:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "06:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "09:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "12:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "15:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "18:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather().today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
     elif call.data == "21:00":
         await call.message.answer(
-            f"""harorat: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
-            f"""havo: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
-            f"""shamol tezligi: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
-            f"""yog'ingarchilik: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
-            f"""namlik: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
+            f"""harorat: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
+            f"""havo: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"""
+            f"""shamol tezligi: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['shamol tezligi']}"""
+            f"""yog'ingarchilik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yog'ingarchilik"]}"""
+            f"""namlik: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['namlik']}"""
+            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(data['city']).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
 
 @router.callback_query(lambda call: call.data == 'get_more_info')
