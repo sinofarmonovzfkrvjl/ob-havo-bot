@@ -23,7 +23,7 @@ async def start(message: types.Message):
 @dp.callback_query(lambda call: call.data != 'get_more_info')
 async def CallBackQuery(call: types.CallbackQuery):
     global city
-    city = [call.data]
+    city = call.data
     max_weather = UzbekistanWeather(call.data).today()[0]['bugun'][0]['harorat'][1]['max']
     min_weather = UzbekistanWeather(call.data).today()[0]['bugun'][0]['harorat'][0]['min']
     await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
@@ -31,8 +31,9 @@ async def CallBackQuery(call: types.CallbackQuery):
 
 @dp.message(lambda hours: hours.data == ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'])
 async def hours_info(call: types.CallbackQuery):
+    print(city)
+    await call.message.answer(city)
     if call.data == "00:00":
-        print(city)
         await call.message.answer(
             f"harorat: {UzbekistanWeather(city[0]).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"
             f"havo: {UzbekistanWeather(city[0]).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['havo']}"
