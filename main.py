@@ -30,6 +30,7 @@ async def CallBackQuery(call: types.CallbackQuery):
 
 @dp.message(lambda hours: hours.data == ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'])
 async def hours_info(call: types.CallbackQuery):
+    print(open("city.txt", "r").read())
     if call.data == "00:00":
         await call.message.answer(
             f"""harorat: {UzbekistanWeather(str(str(open("city.txt", "r").read()))).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']['harorat']}"""
