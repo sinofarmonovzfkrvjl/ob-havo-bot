@@ -116,14 +116,12 @@ async def shutdown():
     await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot to'xtadi")
 
 async def main():
-
     await bot.set_my_commands([
         types.BotCommand(command="start", description="botni ishga tushirish")
     ])
+    
     dp = Dispatcher()
-
     dp.include_router(router)
-
     await dp.start_polling(bot)
 
 
