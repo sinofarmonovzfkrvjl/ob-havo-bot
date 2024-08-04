@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 import logging
 import asyncio
-from weather import UzbekistanWeather
+from .weatherr import UzbekistanWeather
 from keyboards import cities_button, more_info
 from dotenv import load_dotenv
 import os
@@ -24,8 +24,9 @@ async def start(message: types.Message):
 async def CallBackQuery(call: types.CallbackQuery):
     if call.data != "get_more_info":
         info = call.data
-        max_weather = UzbekistanWeather(call.data)#.today()['bugun'][0]['harorat'][0]['max']
-        min_weather = UzbekistanWeather(call.data)#.today()['bugun'][0]['harorat'][0]['min']
+        print(info)
+        max_weather = UzbekistanWeather(call.data).today()(0)['bugun'][0]['harorat'][0]['max']
+        min_weather = UzbekistanWeather(call.data).today()(0)['bugun'][0]['harorat'][0]['min']
         await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
     elif call.data == "get_more_info":
         await call.message.answer(f"{UzbekistanWeather(info).today()}")
