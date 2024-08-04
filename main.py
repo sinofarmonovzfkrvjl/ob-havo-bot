@@ -5,6 +5,7 @@ import asyncio
 from weather import UzbekistanWeather
 from keyboards import cities_button, more_info, hours_btn
 from dotenv import load_dotenv
+from aiogram.fsm.state import State, StatesGroup
 import os
 
 load_dotenv()
