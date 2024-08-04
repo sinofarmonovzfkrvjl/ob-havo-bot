@@ -106,7 +106,7 @@ async def hours_info(call: types.CallbackQuery):
 
 @dp.callback_query(lambda call: call.data == 'get_more_info')
 async def CallbackQUery2(call: types.CallbackQuery):
-    await call.message.answer("")
+    await call.message.answer("vaqtni tanlang", reply_markup=hours_btn)
     await call.answer(cache_time=60)
 
 @dp.shutdown()
