@@ -2,7 +2,7 @@ from aiogram import Bot, Dispatcher, types, Router
 from aiogram.filters import CommandStart
 import logging
 import asyncio
-from weather import UzbekistanWeather
+from weatherr import UzbekistanWeather
 from keyboards import cities_button, more_info, hours_btn
 from dotenv import load_dotenv
 import os
