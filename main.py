@@ -1,4 +1,4 @@
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types, Router
 from aiogram.filters import CommandStart
 import logging
 import asyncio
@@ -12,17 +12,17 @@ import os
 load_dotenv()
 
 bot = Bot(os.getenv("TOKEN"))
-dp = Dispatcher()
+router = Router()
 
-@dp.startup()
+@router.startup()
 async def startup(bot: Bot):
     await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot ishga tushdi")
 
-@dp.message(CommandStart())
+@router.message(CommandStart())
 async def start(message: types.Message):
     await message.answer(f"Salom {message.from_user.full_name}\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang", reply_markup=cities_button)
 
-@dp.callback_query(lambda call: call.data != 'get_more_info')
+@router.callback_query(lambda call: call.data != 'get_more_info')
 async def CallBackQuery(call: types.CallbackQuery, state: FS):
     open("city.txt", "w").write(call.data)
     max_weather = UzbekistanWeather(call.data).today()[0]['bugun'][0]['harorat'][1]['max']
@@ -30,7 +30,7 @@ async def CallBackQuery(call: types.CallbackQuery, state: FS):
     await call.message.answer(f"bugungi {call.data} ob havosi: \n\teng baland harorat: {max_weather}\n\teng past harorat: {min_weather}", reply_markup=more_info)
     await call.answer(cache_time=60)
 
-@dp.message(lambda hours: hours.data == ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'])
+@router.message(lambda hours: hours.data == ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'])
 async def hours_info(call: types.CallbackQuery):
     print(open("city.txt", "r").read())
     if call.data == "00:00":
@@ -106,12 +106,12 @@ async def hours_info(call: types.CallbackQuery):
             f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(open("city.txt", "r").read()).today()[0]['bugun'][1]['3 soatlik harorat']['00:00']["yomg'ir yog'ish ehtimoli"]}"""
         )
 
-@dp.callback_query(lambda call: call.data == 'get_more_info')
+@router.callback_query(lambda call: call.data == 'get_more_info')
 async def CallbackQUery2(call: types.CallbackQuery):
     await call.message.answer("vaqtni tanlang", reply_markup=hours_btn)
     await call.answer(cache_time=60)
 
-@dp.shutdown()
+@router.shutdown()
 async def shutdown():
     await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot to'xtadi")
 
@@ -120,6 +120,10 @@ async def main():
     await bot.set_my_commands([
         types.BotCommand(command="start", description="botni ishga tushirish")
     ])
+    dp = Dispatcher()
+
+    dp.include_router(router)
+
     await dp.start_polling(bot)
 
 
