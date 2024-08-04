@@ -6,6 +6,7 @@ from weather import UzbekistanWeather
 from keyboards import cities_button, more_info, hours_btn
 from dotenv import load_dotenv
 from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.context import FSMContext
 import os
 
 load_dotenv()
@@ -22,7 +23,7 @@ async def start(message: types.Message):
     await message.answer(f"Salom {message.from_user.full_name}\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang", reply_markup=cities_button)
 
 @dp.callback_query(lambda call: call.data != 'get_more_info')
-async def CallBackQuery(call: types.CallbackQuery):
+async def CallBackQuery(call: types.CallbackQuery, state: FS):
     open("city.txt", "w").write(call.data)
     max_weather = UzbekistanWeather(call.data).today()[0]['bugun'][0]['harorat'][1]['max']
     min_weather = UzbekistanWeather(call.data).today()[0]['bugun'][0]['harorat'][0]['min']
