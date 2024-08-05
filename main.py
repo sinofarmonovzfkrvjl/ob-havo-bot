@@ -22,7 +22,7 @@ async def start(message: types.Message):
 
 @router.callback_query(lambda call: call.data != 'get_more_info')
 async def CallBackQuery(call: types.CallbackQuery):
-    timess = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
+    timess = ["00:00", "03:00", "06:00", "09:00"]
     for times in timess:
         await call.message.answer(f"""
             soat {times} da:
@@ -32,6 +32,19 @@ async def CallBackQuery(call: types.CallbackQuery):
                 yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]["yog'ingarchilik"]}
                 namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]['namlik']}
                 yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]["yomg'ir yog'ish ehtimoli"]}
+        """)
+        await call.answer(cache_time=60)
+        time.sleep(1)
+    timess2 = ["12:00", "15:00", "18:00", "21:00"]
+    for times2 in timess2:
+        await call.message.answer(f"""
+            soat {times} da:
+                harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times2]['harorat']}C
+                havo: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times2]['havo']}
+                shamol tezligi: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times2]['shamol tezligi']}
+                yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times2]["yog'ingarchilik"]}
+                namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times2]['namlik']}
+                yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times2]["yomg'ir yog'ish ehtimoli"]}
         """)
         await call.answer(cache_time=60)
         time.sleep(1)
