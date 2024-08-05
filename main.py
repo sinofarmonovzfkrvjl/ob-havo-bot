@@ -21,16 +21,16 @@ async def start(message: types.Message):
 
 @router.callback_query(lambda call: call.data != 'get_more_info')
 async def CallBackQuery(call: types.CallbackQuery):
+    await call.answer(cache_time=60)
     for time in ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]:
-        await call.message.answer(
-            """soat 00:00 ⏰ da\n"""
-            f"""harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['harorat']}\n\t"""
-            f"""havo: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['havo']}\n\t"""
-            f"""shamol tezligi: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['shamol tezligi']}\n\t"""
-            f"""yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yog'ingarchilik"]}\n\t"""
-            f"""namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['namlik']}\n\t"""
-            f"""yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yomg'ir yog'ish ehtimoli"]}\n\t"""
-        )
+        await call.message.answer(f"""
+            harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['harorat']}
+            havo: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['havo']}
+            shamol tezligi: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['shamol tezligi']}
+            yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yog'ingarchilik"]}
+            namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['namlik']}
+            yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yomg'ir yog'ish ehtimoli"]}
+        """)
 
 @router.callback_query(lambda call: call.data == 'get_more_info')
 async def CallbackQUery2(call: types.CallbackQuery):
