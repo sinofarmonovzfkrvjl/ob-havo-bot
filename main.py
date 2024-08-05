@@ -23,6 +23,7 @@ async def start(message: types.Message):
 async def CallBackQuery(call: types.CallbackQuery):
     city = call.data
     timess = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
+    await call.answer(cache_time=60)
     for times in timess:
         await call.message.answer(f"""
             soat {times} da:
@@ -33,7 +34,6 @@ async def CallBackQuery(call: types.CallbackQuery):
                 namlik: {UzbekistanWeather(city).today()[0]['bugun'][1]['3 soatlik harorat'][times]['namlik']}
                 yomg'ir yog'ish ehtimoli: {UzbekistanWeather(city).today()[0]['bugun'][1]['3 soatlik harorat'][times]["yomg'ir yog'ish ehtimoli"]}
         """)
-        await call.answer(cache_time=60)
 
 @router.shutdown()
 async def shutdown():
