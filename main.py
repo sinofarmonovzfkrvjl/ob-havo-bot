@@ -6,6 +6,7 @@ from uzbekistanweather import UzbekistanWeather
 from keyboards import cities_button, more_info, hours_btn
 from dotenv import load_dotenv
 import os
+import time
 
 load_dotenv()
 bot = Bot(os.getenv("TOKEN"))
@@ -21,19 +22,19 @@ async def start(message: types.Message):
 
 @router.callback_query(lambda call: call.data != 'get_more_info')
 async def CallBackQuery(call: types.CallbackQuery):
-    await call.answer(cache_time=60)
-    times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
-    for time in times:
+    timess = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
+    for times in timess:
         await call.message.answer(f"""
-            soat 00:00 da:
-                harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['harorat']}C
-                havo: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['havo']}
-                shamol tezligi: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['shamol tezligi']}
-                yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yog'ingarchilik"]}
-                namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['namlik']}
-                yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yomg'ir yog'ish ehtimoli"]}
+            soat {times} da:
+                harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]['harorat']}C
+                havo: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]['havo']}
+                shamol tezligi: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]['shamol tezligi']}
+                yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]["yog'ingarchilik"]}
+                namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]['namlik']}
+                yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][times]["yomg'ir yog'ish ehtimoli"]}
         """)
-        times.remove(time)
+        await call.answer(cache_time=60)
+        time.sleep(1)
 
 @router.callback_query(lambda call: call.data == 'get_more_info')
 async def CallbackQUery2(call: types.CallbackQuery):
