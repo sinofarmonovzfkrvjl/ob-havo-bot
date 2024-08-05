@@ -22,7 +22,8 @@ async def start(message: types.Message):
 @router.callback_query(lambda call: call.data != 'get_more_info')
 async def CallBackQuery(call: types.CallbackQuery):
     await call.answer(cache_time=60)
-    for time in ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]:
+    times = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
+    for time in times:
         await call.message.answer(f"""
             soat 00:00 da:
                 harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['harorat']}C
@@ -32,6 +33,7 @@ async def CallBackQuery(call: types.CallbackQuery):
                 namlik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['namlik']}
                 yomg'ir yog'ish ehtimoli: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yomg'ir yog'ish ehtimoli"]}
         """)
+        times.remove(time)
 
 @router.callback_query(lambda call: call.data == 'get_more_info')
 async def CallbackQUery2(call: types.CallbackQuery):
