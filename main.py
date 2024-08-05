@@ -37,12 +37,6 @@ async def CallBackQuery(call: types.CallbackQuery):
         await call.answer(cache_time=60)
         time.sleep(1)
 
-
-@router.callback_query(lambda call: call.data == 'get_more_info')
-async def CallbackQUery2(call: types.CallbackQuery):
-    await call.message.answer("vaqtni tanlang", reply_markup=hours_btn)
-    await call.answer(cache_time=60)
-
 @router.shutdown()
 async def shutdown():
     await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot to'xtadi")

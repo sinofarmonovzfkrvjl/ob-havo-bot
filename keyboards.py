@@ -11,7 +11,3 @@ cities_button = InlineKeyboardMarkup(
         [InlineKeyboardButton(text="Farg'ona", callback_data="farg'ona"), InlineKeyboardButton(text="xiva", callback_data="xiva")]
     ]
 )
-
-more_info = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="ko'proq ma'lumot olish", callback_data="get_more_info")]
-])
