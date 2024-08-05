@@ -25,7 +25,7 @@ async def CallBackQuery(call: types.CallbackQuery):
     for time in ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]:
         await call.message.answer(f"""
             soat 00:00 da:
-                harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['harorat']}
+                harorat: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['harorat']}C
                 havo: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['havo']}
                 shamol tezligi: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]['shamol tezligi']}
                 yog'ingarchilik: {UzbekistanWeather(call.data).today()[0]['bugun'][1]['3 soatlik harorat'][time]["yog'ingarchilik"]}

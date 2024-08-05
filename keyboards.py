@@ -22,3 +22,6 @@ hours_btn = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="12:00", callback_data="12:00"), InlineKeyboardButton(text="15:00", callback_data="15:00")],
     [InlineKeyboardButton(text="18:00", callback_data="18:00"), InlineKeyboardButton(text="21:00", callback_data="21:00")]
 ])
+
+for time in ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]:
+    print(time)
