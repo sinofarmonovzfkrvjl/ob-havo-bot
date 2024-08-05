@@ -15,10 +15,3 @@ cities_button = InlineKeyboardMarkup(
 more_info = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="ko'proq ma'lumot olish", callback_data="get_more_info")]
 ])
-
-hours_btn = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="00:00", callback_data="00:00"), InlineKeyboardButton(text="03:00", callback_data="03:00")],
-    [InlineKeyboardButton(text="06:00", callback_data="06:00"), InlineKeyboardButton(text="09:00", callback_data="09:00")],
-    [InlineKeyboardButton(text="12:00", callback_data="12:00"), InlineKeyboardButton(text="15:00", callback_data="15:00")],
-    [InlineKeyboardButton(text="18:00", callback_data="18:00"), InlineKeyboardButton(text="21:00", callback_data="21:00")]
-])
