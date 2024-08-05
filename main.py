@@ -3,10 +3,9 @@ from aiogram.filters import CommandStart
 import logging
 import asyncio
 from uzbekistanweather import UzbekistanWeather
-from keyboards import cities_button, more_info
+from keyboards import cities_button
 from dotenv import load_dotenv
 import os
-import time
 
 load_dotenv()
 bot = Bot(os.getenv("TOKEN"))
@@ -35,7 +34,6 @@ async def CallBackQuery(call: types.CallbackQuery):
                 yomg'ir yog'ish ehtimoli: {UzbekistanWeather(city).today()[0]['bugun'][1]['3 soatlik harorat'][times]["yomg'ir yog'ish ehtimoli"]}
         """)
         await call.answer(cache_time=60)
-        time.sleep(1)
 
 @router.shutdown()
 async def shutdown():
