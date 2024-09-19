@@ -18,6 +18,7 @@ class UzbekistanWeather:
         return [response.json(), self.place]
 
 load_dotenv()
+
 bot = Bot(os.getenv("TOKEN"))
 router = Router()
 
@@ -31,6 +32,7 @@ async def start(message: types.Message):
 
 @router.callback_query(lambda call: call.data in ["zero", "three", "six", "nine", "twelve", "fiveteen", "eighteen", "twentyone", "twentyfour"])
 async def CallBackQuery(call: types.CallbackQuery):
+    print(call.data)
     weather = UzbekistanWeather(place=place['place']).today()
     if call.data == "zero":
         await call.message.answer(f"""
@@ -58,9 +60,11 @@ async def CallBackQuery(call: types.CallbackQuery):
         times = "21:00"
     elif call.data == "twentyfour":
         times = "24:00"
-
-@router.message()
+        
+print("matched")
+@router.message(lambda call: True)
 async def answer(call: types.CallbackQuery):
+    print("matched")
     city = call.data
     place['place'] = city
     await call.message.answer("vaqtni tanlang", reply_markup=times)
