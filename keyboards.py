@@ -21,3 +21,11 @@ cities_button = InlineKeyboardMarkup(
         [InlineKeyboardButton(text="Uchquduq", callback_data="uchquduq"), InlineKeyboardButton(text="Urgut", callback_data="urgut"), InlineKeyboardButton(text="Urganch", callback_data="urganch")],
     ]
 )
+
+times = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text="00:00", callback_data="zero"), InlineKeyboardButton(text="03:00", callback_data="three")],
+    [InlineKeyboardButton(text="06:00", callback_data="six"), InlineKeyboardButton(text="09:00", callback_data="nine")],
+    [InlineKeyboardButton(text="12:00", callback_data="twelve"), InlineKeyboardButton(text="15:00", callback_data="fiveteen")],
+    [InlineKeyboardButton(text="18:00", callback_data="eighteen"), InlineKeyboardButton(text="21:00", callback_data="twentyone")],
+    [InlineKeyboardButton(text="24:00", callback_data="twentyfour")],
+])

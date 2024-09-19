@@ -3,9 +3,11 @@ from aiogram.filters import CommandStart
 import logging
 import asyncio
 import requests
-from keyboards import cities_button
+from keyboards import cities_button, times
 from dotenv import load_dotenv
 import os
+
+place = {'place': None}
 
 class UzbekistanWeather:
     def __init__(self, place):
@@ -27,14 +29,10 @@ async def startup(bot: Bot):
 async def start(message: types.Message):
     await message.answer(f"Salom {message.from_user.full_name}\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang", reply_markup=cities_button)
 
-@router.callback_query()
+@router.callback_query(lambda call: call.data in ["zero", "three", "six", "nine", "twelve", "fiveteen", "eighteen", "twentyone", "twentyfour"])
 async def CallBackQuery(call: types.CallbackQuery):
-    city = call.data
-    timess = ["00:00", "03:00", "06:00", "09:00", "12:00", "15:00", "18:00", "21:00"]
-    await call.answer(cache_time=60)
-    weather = UzbekistanWeather(city).today()
-    await call.message.answer(weather[1].capitalize())
-    for times in timess:
+    weather = UzbekistanWeather(place=place['place']).today()
+    if call.data == "zero":
         await call.message.answer(f"""
             soat {times} da:
             harorat: {weather[0][0]['bugun'][1]['3 soatlik harorat'][times]['harorat']}C
@@ -44,6 +42,28 @@ async def CallBackQuery(call: types.CallbackQuery):
             namlik: {weather[0][0]['bugun'][1]['3 soatlik harorat'][times]['namlik']}
             yomg'ir yog'ish ehtimoli: {weather[0][0]['bugun'][1]['3 soatlik harorat'][times]["yomg'ir yog'ish ehtimoli"]}
         """)
+    elif call.data == "three":
+        times = "03:00"
+    elif call.data == "six":
+        times = "06:00"
+    elif call.data == "nine":
+        times = "09:00"
+    elif call.data == "twelve":
+        times = "12:00"
+    elif call.data == "fiveteen":
+        times = "15:00"
+    elif call.data == "eighteen":
+        times = "18:00"
+    elif call.data == "twentyone":
+        times = "21:00"
+    elif call.data == "twentyfour":
+        times = "24:00"
+
+@router.message()
+async def answer(call: types.CallbackQuery):
+    city = call.data
+    place['place'] = city
+    await call.message.answer("vaqtni tanlang", reply_markup=times)
 
 @router.shutdown()
 async def shutdown():
