@@ -1,5 +1,4 @@
 aiogram
 logging
 asyncio
-UzbekistanWeather
-fastapi
+python-dotenv
