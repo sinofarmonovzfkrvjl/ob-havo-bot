@@ -2,3 +2,4 @@ aiogram
 logging
 asyncio
 python-dotenv
+requests
