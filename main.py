@@ -6,8 +6,11 @@ from keyboards import cities_button, times
 from dotenv import load_dotenv
 import os
 from uzbekistanweather import UzbekistanWeather
+from keep_alive import keep_alive
 
 place = {'place': None}
+
+keep_alive()
 
 load_dotenv()
 
