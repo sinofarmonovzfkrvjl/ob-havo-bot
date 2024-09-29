@@ -1,5 +1,6 @@
 aiogram
 logging
 asyncio
+flask
 python-dotenv
 requests
