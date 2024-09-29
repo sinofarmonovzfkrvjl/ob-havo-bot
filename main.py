@@ -17,10 +17,6 @@ load_dotenv()
 bot = Bot(os.getenv("TOKEN"))
 router = Router()
 
-@router.startup()
-async def startup(bot: Bot):
-    await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot ishga tushdi")
-
 @router.message(CommandStart())
 async def start(message: types.Message):
     await message.answer(f"Salom {message.from_user.full_name}\nmen ob havo malumotlarini berivchi botman\no'z hududingizni tanlang", reply_markup=cities_button)
@@ -133,10 +129,6 @@ yomg'ir yog'ish ehtimoli: {weather[0][0]['bugun'][1]['3 soatlik harorat']["24:00
 kiyimlarga oid tavfsiyalar: {weather[0][0]['bugun'][2]['kiyimlarga oid tavfsiyalar'][0]}, {weather[0][0]['bugun'][2]['kiyimlarga oid tavfsiyalar'][1]}
 """)
     await call.answer(cache_time=10)
-
-@router.shutdown()
-async def shutdown():
-    await bot.send_message(os.getenv("TELEGRAM_ID"), "Bot to'xtadi")
 
 async def main():
     await bot.set_my_commands([
